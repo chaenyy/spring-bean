@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="daisoRemocon" class="com.kh.spring.tv.DaisoRemocon"></bean>
+	<bean id="balmudaRemocon" class="com.kh.spring.tv.BalmudaRemocon"></bean>
+	<!-- 
+		scope 
+			- singletone(기본값)
+			- prototype getBean요청시마다 객체생성
+			- request
+			- session
+	 -->
+	<bean id="lgTv" class="com.kh.spring.tv.LgTv" scope="singleton">
+		<property name="remocon" ref="balmudaRemocon"></property>
+	</bean>
+	<bean id="samsungTv" class="com.kh.spring.tv.SamsungTv" lazy-init="true">
+		<constructor-arg ref="balmudaRemocon" index="0"/>
+	</bean>
+
+</beans>
